@@ -1,6 +1,7 @@
 package demo.sc.dog.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,11 +9,23 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class DogService {
     private final RestTemplate restTemplate;
+    private final CircuitBreakerFactory circuitBreakerFactory;
 
     public String getRandomDog() {
-        String name = restTemplate.getForObject("http://dog-name-service/api/random", String.class);
-        String breed = restTemplate.getForObject("http://dog-breed-service/api/random", String.class);
+        return getDogName() + " " + getDogBreed();
+    }
 
-        return name + " " + breed;
+    public String getDogName() {
+        return circuitBreakerFactory
+                .create("getDogName")
+                .run(() -> restTemplate.getForObject("http://dog-name-service/api/random", String.class),
+                        throwable -> "defaultDogName");
+    }
+
+    public String getDogBreed() {
+        return circuitBreakerFactory
+                .create("getDogBreed")
+                .run(() -> restTemplate.getForObject("http://dog-breed-service/api/random", String.class),
+                        throwable -> "defaultDogBreed");
     }
 }
