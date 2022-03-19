@@ -32,3 +32,13 @@ gradlew bootRun
 cd dog-breed-service
 gradlew bootRun
 ```
+
+#### Dog microservice
+
+```
+cd dog-service
+gradlew bootRun
+```
+
+Dog microservice will display a random dog name and a random dog breed obtained from `dog-name-service` and `dog-breed-service` respectively:
+http://localhost:8080/api/random
