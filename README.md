@@ -18,3 +18,17 @@ gradlew bootRun
 ```
 
 Eureka console will be available at http://localhost:8761
+
+#### Dog name microservice
+
+```
+cd dog-name-service
+gradlew bootRun
+```
+
+#### Dog breed microservice
+
+```
+cd dog-breed-service
+gradlew bootRun
+```
