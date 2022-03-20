@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: dog-breed-service
+
+server:
+  port: 0
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
+#actuator
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,beans
+
+info:
+  app:
+    name: ${spring.application.name}
