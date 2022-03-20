@@ -6,6 +6,7 @@ This sample demonstrates Spring Cloud microservice architecture:
 * RESTful communication between microservices 
 * Circuit breaker
 * Sleuth tracing and Zipkin collector service
+* Performance optimization: `dog-service` calls `dog-name-service` and `dog-breed-service` in parallel
 
 ### Prerequisites
 
