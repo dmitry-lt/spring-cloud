@@ -53,14 +53,14 @@ public class DogService {
         return dog.getName() + " " + dog.getBreed();
     }
 
-    public String requestDogName() {
+    private String requestDogName() {
         return circuitBreakerFactory
                 .create("requestDogName")
                 .run(() -> restTemplate.getForObject("http://dog-name-service/api/random", String.class),
                         throwable -> "defaultDogName");
     }
 
-    public String requestDogBreed() {
+    private String requestDogBreed() {
         return circuitBreakerFactory
                 .create("requestDogBreed")
                 .run(() -> restTemplate.getForObject("http://dog-breed-service/api/random", String.class),
