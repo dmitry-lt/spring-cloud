@@ -8,54 +8,62 @@ This sample demonstrates Spring Cloud microservice architecture:
 * Sleuth tracing and Zipkin collector service
 * Performance optimization: `dog-service` calls `dog-name-service` and `dog-breed-service` in parallel
 
-### Prerequisites
+## Prerequisites
 
 Must be installed locally
 
 * Java 17
 * Docker
 
-### Local run
+## Local run
 
-#### Eureka service registry
+### Eureka service registry
 
 ```
 cd service-registry
 gradlew bootRun
 ```
 
-Eureka console will be available at http://localhost:8761
+Eureka console is available at http://localhost:8761
 
-#### Dog name microservice
+### Dog name microservice
 
 ```
 cd dog-name-service
 gradlew bootRun
 ```
 
-#### Dog breed microservice
+Returns a random dog name
+
+### Dog breed microservice
 
 ```
 cd dog-breed-service
 gradlew bootRun
 ```
 
-#### Dog microservice
+Returns a random dog breed
+
+### Dog microservice
 
 ```
 cd dog-service
 gradlew bootRun
 ```
 
-Dog microservice will display a random dog name and a random dog breed obtained from `dog-name-service` and `dog-breed-service` respectively:
+Dog microservice displays a random dog name and a random dog breed obtained from `dog-name-service` and `dog-breed-service` respectively:
 http://localhost:8080/api/random
 
-If `dog-name-service` or `dog-breed-service` is not running, the circuit breaker will fall back to the default dog name and breed
+![Dog service endpoint screenshot](screenshots/dog-service.png?raw=true "Dog service")
 
-#### Zipkin collector service
+If `dog-name-service` or `dog-breed-service` is not running, the circuit breaker falls back to the default dog name and breed
+
+### Zipkin collector service
 
 ```
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
-Zipkin console will be available at http://localhost:9411
+Zipkin console is available at http://localhost:9411
+
+![Zipkin screenshot](screenshots/zipkin-trace-call-services-in-parallel-2.png?raw=true "Zipkin console")
