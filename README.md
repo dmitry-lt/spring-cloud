@@ -3,7 +3,7 @@
 This sample demonstrates Spring Cloud microservice architecture:
 * Eureka service registry
 * Eureka clients
-* RESTful communication between microservices 
+* RESTful load balanced communication between microservices 
 * Circuit breaker
 * Sleuth tracing and Zipkin collector service
 * Performance optimization: `dog-service` calls `dog-name-service` and `dog-breed-service` in parallel
