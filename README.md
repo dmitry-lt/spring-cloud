@@ -5,12 +5,14 @@ This sample demonstrates Spring Cloud microservice architecture:
 * Eureka clients
 * RESTful communication between microservices 
 * Circuit breaker
+* Sleuth tracing and Zipkin collector service
 
 ### Prerequisites
 
 Must be installed locally
 
 * Java 17
+* Docker
 
 ### Local run
 
@@ -48,3 +50,11 @@ Dog microservice will display a random dog name and a random dog breed obtained 
 http://localhost:8080/api/random
 
 If `dog-name-service` or `dog-breed-service` is not running, the circuit breaker will fall back to the default dog name and breed
+
+#### Zipkin collector service
+
+```
+docker run -d -p 9411:9411 openzipkin/zipkin
+```
+
+Zipkin console will be available at http://localhost:9411
